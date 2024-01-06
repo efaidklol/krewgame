@@ -58,8 +58,20 @@
         <div id="game-screen"></div>
 
         <script>
-            // JavaScript code (game logic) goes here
-            // ...
+            function handleCommand(command) {
+                switch (command) {
+                    case 'spawnEnemy':
+                        spawnEnemy();
+                        break;
+                    case 'increaseFireRate':
+                        increaseFireRate();
+                        break;
+                    case 'increaseEnemyHealth':
+                        increaseEnemyHealth();
+                        break;
+                    // Add more commands as needed
+                }
+            }
 
             // For demonstration purposes, here are the dummy functions:
             function spawnEnemy() {
