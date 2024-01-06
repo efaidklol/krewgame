@@ -1,21 +1,43 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Controller</title>
+    <title>Controlled Game</title>
+    <style>
+        /* Your existing styles */
+    </style>
 </head>
 <body>
-    <h1>Game Controller</h1>
-    <button onclick="sendCommand('spawnEnemy')">Spawn Enemy</button>
-    <button onclick="sendCommand('increaseFireRate')">Increase Enemy Fire Rate</button>
-    <button onclick="sendCommand('increaseEnemyHealth')">Increase Enemy Health</button>
+    <div id="game-container">
+        <div id="health-bar-container">
+            <div id="health-bar"></div>
+        </div>
+        <script>
+            // Your existing controlled game logic...
 
-    <script>
-        function sendCommand(command) {
-            // Open the controlled HTML with the specified command as a hash fragment
-            window.open(`https://efaidklol.github.io/krewgame/controlled.html#${command}`);
-        }
-    </script>
+            // Listen for messages from the controller
+            window.addEventListener('message', function (event) {
+                const { command } = event.data;
+
+                // Handle the command received from the controller
+                switch (command) {
+                    case 'spawnEnemy':
+                        // Call a function to handle spawning an enemy
+                        spawnEnemy();
+                        break;
+                    case 'increaseFireRate':
+                        // Call a function to handle increasing enemy fire rate
+                        // ...
+                        break;
+                    case 'increaseEnemyHealth':
+                        // Call a function to handle increasing enemy health
+                        // ...
+                        break;
+                    // Add more cases for other commands as needed
+                }
+            });
+        </script>
+    </div>
 </body>
 </html>
