@@ -3,19 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controlled HTML</title>
+    <title>Controlled Game</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #eee;
+        }
+
+        #game-container {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            border: 2px solid #333;
+        }
+
+        #health-bar-container {
+            width: 100%;
+            height: 20px;
+            background-color: #f00;
+        }
+
+        #health-bar {
+            height: 100%;
+            background-color: #0f0;
+        }
+
+        #score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
+        }
+
+        #powerup-status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Controlled HTML</h1>
-    <p>Parameters received: <span id="parameters"></span></p>
+    <div id="game-container">
+        <div id="health-bar-container">
+            <div id="health-bar"></div>
+        </div>
+        <div id="score">Score: 0</div>
+        <div id="powerup-status">Powerup: Inactive</div>
+        <div id="game-screen"></div>
 
-    <script>
-        // Get parameters from the URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const parameters = urlParams.toString();
+        <script>
+            // JavaScript code (game logic) goes here
+            // ...
 
-        // Display parameters on the page
-        document.getElementById('parameters').innerText = parameters;
-    </script>
+            // For demonstration purposes, here are the dummy functions:
+            function spawnEnemy() {
+                // Add your enemy spawning logic here
+                console.log('Enemy Spawned');
+            }
+
+            function increaseFireRate() {
+                // Add your enemy fire rate increase logic here
+                console.log('Enemy Fire Rate Increased');
+            }
+
+            function increaseEnemyHealth() {
+                // Add your enemy health increase logic here
+                console.log('Enemy Health Increased');
+            }
+
+            // Other game logic...
+            // ...
+        </script>
+    </div>
 </body>
 </html>
