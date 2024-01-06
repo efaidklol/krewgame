@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controller HTML</title>
+</head>
+<body>
+    <h1>Controller HTML</h1>
+    <button onclick="sendCommands()">Send Commands</button>
+
+    <script>
+        function sendCommands() {
+            // Specify the commands as query parameters
+            const commands = 'increaseFireRate=1&increaseEnemyHealth=1';
+
+            // Open the controlled HTML with the specified parameters
+            window.open(`https://username.github.io/repository/controlled.html?${commands}`);
+        }
+    </script>
+</body>
+</html>
