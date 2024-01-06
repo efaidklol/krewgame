@@ -5,93 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controlled Game</title>
     <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #eee;
-        }
-
-        #game-container {
-            position: relative;
-            width: 800px;
-            height: 600px;
-            border: 2px solid #333;
-        }
-
-        #health-bar-container {
-            width: 100%;
-            height: 20px;
-            background-color: #f00;
-        }
-
-        #health-bar {
-            height: 100%;
-            background-color: #0f0;
-        }
-
-        #score {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 20px;
-        }
-
-        #powerup-status {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
-        }
+        /* Add your styles here */
     </style>
 </head>
 <body>
     <div id="game-container">
-        <div id="health-bar-container">
-            <div id="health-bar"></div>
-        </div>
-        <div id="score">Score: 0</div>
-        <div id="powerup-status">Powerup: Inactive</div>
-        <div id="game-screen"></div>
-
-        <script>
-            function handleCommand(command) {
-                switch (command) {
-                    case 'spawnEnemy':
-                        spawnEnemy();
-                        break;
-                    case 'increaseFireRate':
-                        increaseFireRate();
-                        break;
-                    case 'increaseEnemyHealth':
-                        increaseEnemyHealth();
-                        break;
-                    // Add more commands as needed
-                }
-            }
-
-            // For demonstration purposes, here are the dummy functions:
-            function spawnEnemy() {
-                // Add your enemy spawning logic here
-                console.log('Enemy Spawned');
-            }
-
-            function increaseFireRate() {
-                // Add your enemy fire rate increase logic here
-                console.log('Enemy Fire Rate Increased');
-            }
-
-            function increaseEnemyHealth() {
-                // Add your enemy health increase logic here
-                console.log('Enemy Health Increased');
-            }
-
-            // Other game logic...
-            // ...
-        </script>
+        <!-- Your existing game elements -->
     </div>
+
+    <script>
+        const MAX_ENEMIES = 3;
+
+        function spawnEnemy() {
+            // Check the current number of enemies before spawning a new one
+            const currentEnemies = document.querySelectorAll('.enemy').length;
+
+            if (currentEnemies < MAX_ENEMIES) {
+                // Create a new enemy element
+                const enemy = document.createElement('div');
+                enemy.className = 'enemy';
+                enemy.textContent = 'Enemy';
+
+                // Add the enemy to the game container
+                document.getElementById('game-container').appendChild(enemy);
+                console.log('Enemy Spawned');
+            } else {
+                console.log('Maximum number of enemies reached');
+            }
+        }
+
+        // Auto-spawn enemies at regular intervals (e.g., every 2 seconds)
+        setInterval(spawnEnemy, 2000);
+
+        // Other game logic...
+    </script>
 </body>
 </html>
