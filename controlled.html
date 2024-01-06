@@ -22,104 +22,124 @@
             border: 2px solid #333;
         }
 
-        .enemy {
+        .player {
             position: absolute;
-            width: 50px;
-            height: 50px;
-            background-color: #ff0000;
+            width: 30px;
+            height: 30px;
+            background-color: #00ff00; /* Green */
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 16px;
             font-weight: bold;
             color: #fff;
-        }
-
-        .power-up {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: #800080; /* Purple */
             border-radius: 50%;
+            top: 285px; /* Initial position, adjust as needed */
+            left: 385px; /* Initial position, adjust as needed */
         }
 
-        .bullet {
+        .eye {
             position: absolute;
             width: 5px;
             height: 5px;
-            background-color: #ff0000;
+            background-color: #000;
             border-radius: 50%;
         }
 
-        #health-bar-container {
-            width: 100%;
-            height: 20px;
-            background-color: #00ff00; /* Green */
-            position: absolute;
-            bottom: 0;
-            left: 0;
+        #left-eye {
+            top: 290px;
+            left: 380px;
         }
 
-        #health-bar {
-            height: 100%;
-            background-color: #ff0000; /* Red */
-        }
-
-        #shoot-button {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        #right-eye {
+            top: 290px;
+            left: 395px;
         }
     </style>
 </head>
 <body>
     <div id="game-container">
-        <div id="health-bar-container">
-            <div id="health-bar"></div>
+        <div class="player" id="player">
+            <div class="eye" id="left-eye"></div>
+            <div class="eye" id="right-eye"></div>
         </div>
-        <button id="shoot-button" onclick="shoot()">Shoot</button>
         <script>
-            const MAX_ENEMIES = 3;
-            let enemyCount = 0;
+            // Player movement
+            const playerSpeed = 5;
+            const player = document.getElementById('player');
+            const leftEye = document.getElementById('left-eye');
+            const rightEye = document.getElementById('right-eye');
 
-            function spawnEnemy() {
-                if (enemyCount < MAX_ENEMIES) {
-                    const enemy = document.createElement('div');
-                    enemy.className = 'enemy';
-                    enemy.textContent = 'Enemy';
+            // Initial player direction
+            let playerDirection = { x: 0, y: 0 };
 
-                    // Randomly position the enemy within the game container
-                    const x = Math.random() * (800 - 50);
-                    const y = Math.random() * (600 - 50);
-                    enemy.style.left = `${x}px`;
-                    enemy.style.top = `${y}px`;
-
-                    // Add the enemy to the game container
-                    document.getElementById('game-container').appendChild(enemy);
-                    enemyCount++;
-                    console.log('Enemy Spawned');
-                } else {
-                    console.log('Maximum number of enemies reached');
+            document.addEventListener('keydown', function (event) {
+                switch (event.key.toLowerCase()) {
+                    case 'w':
+                        playerDirection.y = -1;
+                        break;
+                    case 'a':
+                        playerDirection.x = -1;
+                        break;
+                    case 's':
+                        playerDirection.y = 1;
+                        break;
+                    case 'd':
+                        playerDirection.x = 1;
+                        break;
+                    case 'f':
+                        // Call a function to handle shooting logic
+                        shoot();
+                        break;
                 }
+            });
+
+            document.addEventListener('keyup', function (event) {
+                switch (event.key.toLowerCase()) {
+                    case 'w':
+                    case 's':
+                        playerDirection.y = 0;
+                        break;
+                    case 'a':
+                    case 'd':
+                        playerDirection.x = 0;
+                        break;
+                }
+            });
+
+            function movePlayer() {
+                const playerRect = player.getBoundingClientRect();
+                const newTop = playerRect.top + playerDirection.y * playerSpeed;
+                const newLeft = playerRect.left + playerDirection.x * playerSpeed;
+
+                // Ensure the player stays within the game container
+                if (newTop >= 0 && newTop + playerRect.height <= 600) {
+                    player.style.top = `${newTop}px`;
+                }
+
+                if (newLeft >= 0 && newLeft + playerRect.width <= 800) {
+                    player.style.left = `${newLeft}px`;
+                }
+
+                // Update eye positions based on player movement
+                leftEye.style.top = `${parseInt(player.style.top) + 5}px`;
+                leftEye.style.left = `${parseInt(player.style.left) - 5}px`;
+
+                rightEye.style.top = `${parseInt(player.style.top) + 5}px`;
+                rightEye.style.left = `${parseInt(player.style.left) + 10}px`;
             }
 
-            // Auto-spawn enemies at regular intervals (e.g., every 2 seconds)
-            setInterval(spawnEnemy, 2000);
+            // Auto-move the player at regular intervals
+            setInterval(movePlayer, 16);
 
             function shoot() {
                 // Create a bullet element
                 const bullet = document.createElement('div');
                 bullet.className = 'bullet';
 
-                // Set the initial position of the bullet (e.g., aligned with the player)
-                bullet.style.left = '400px'; // Adjust this value based on your player's position
-                bullet.style.top = '550px';  // Adjust this value based on your player's position
+                // Set the initial position of the bullet (aligned with the player)
+                bullet.style.left = player.style.left;
+                bullet.style.top = player.style.top;
 
                 // Add the bullet to the game container
                 document.getElementById('game-container').appendChild(bullet);
