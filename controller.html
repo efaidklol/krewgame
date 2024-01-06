@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Controller HTML</title>
+    <title>Controller</title>
 </head>
 <body>
-    <h1>Controller HTML</h1>
-    <button onclick="sendCommands()">Send Commands</button>
+    <h1>Game Controller</h1>
+    <button onclick="sendCommand('spawnEnemy')">Spawn Enemy</button>
+    <button onclick="sendCommand('increaseFireRate')">Increase Enemy Fire Rate</button>
+    <button onclick="sendCommand('increaseEnemyHealth')">Increase Enemy Health</button>
 
     <script>
-        function sendCommands() {
-            // Specify the commands as query parameters
-            const commands = 'increaseFireRate=1&increaseEnemyHealth=1';
-
-            // Open the controlled HTML with the specified parameters
-            window.open(`https://username.github.io/repository/controlled.html?${commands}`);
+        function sendCommand(command) {
+            // Open the controlled HTML with the specified command as a query parameter
+            window.open(`https://username.github.io/repository/controlled.html?command=${command}`);
         }
     </script>
 </body>
