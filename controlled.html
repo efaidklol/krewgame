@@ -64,6 +64,18 @@
             height: 100%;
             background-color: #ff0000; /* Red */
         }
+
+        #shoot-button {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -71,6 +83,7 @@
         <div id="health-bar-container">
             <div id="health-bar"></div>
         </div>
+        <button id="shoot-button" onclick="shoot()">Shoot</button>
         <script>
             const MAX_ENEMIES = 3;
             let enemyCount = 0;
@@ -98,14 +111,6 @@
 
             // Auto-spawn enemies at regular intervals (e.g., every 2 seconds)
             setInterval(spawnEnemy, 2000);
-
-            // Handling shooting with the space bar
-            document.addEventListener('keydown', function (event) {
-                if (event.key === ' ' || event.key === 'Spacebar') {
-                    // Call a function to handle shooting logic
-                    shoot();
-                }
-            });
 
             function shoot() {
                 // Create a bullet element
